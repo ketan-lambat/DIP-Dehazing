@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link href="/static/styles/webapp.css" rel="stylesheet" type="text/css">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Dehazing</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+
+</head>
+
+
+<body>
+
+<h1> Image Dehazing</h1>
+
+<h2> Description</h2>
+<p> Image Dehazing with DCP algorithm. Upload image by clicking the upload button. After the
+    image is processed it will be displayed to the right.</p>
+
+<br>
+
+<h3> Example </h3>
+<form runat="server">
+  <br>
+    <img id="sample_input" src="/static/images/forest_input.jpg" width="150" height = "200"/> <img src ="/static/images/right-arrow-31.gif"> <img id="sample_output" src="/static/images/forest_output.jpg" width="150" height = "200"/>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3> Your Turn! </h3>
+    <input type='file' id="the_img" oninput = "readURL(this)" />
+    <br>
+   <img id="blah"/> <img id = "arrow" src = "/static/images/right-arrow-31.gif" style="display: none;"> <img id="output"/>
+
+</form>
+
+</body>
+
+
+</html>
