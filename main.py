@@ -171,9 +171,15 @@ def dehazed_image():
     ret_string = ''
     if request.method == 'POST':
         base = request.form.get('image')
+        comma = base.index(',')
+        base = base[comma + 1::]
         image = base64.b64decode(base)
-        img = cv2.imread('C:/Users/Home/Downloads/haze6.jpg')
-        img = cv2.resize(img,None,fx=0.5,fy=0.5)
+        fh = open("inputimage.jpg", "wb")
+        fh.write(image)
+        fh.close()
+        im = Image.open("inputimage.jpg")
+        img = cv2.imread('inputimage.jpg')
+        img = cv2.resize(img,(0,0),fx=0.5,fy=0.5)
         dcp_img = calculate_DCP(img, 15)
         dcp_img = dcp_img.astype('uint8')
         atm_light = calculate_ambience(img, dcp_img)
