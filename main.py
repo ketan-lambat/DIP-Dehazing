@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from cv2 import cv2
+import cv2
 import os
 from flask import Flask, render_template, request
 import base64
@@ -180,15 +180,15 @@ def dehazed_image():
         im = Image.open("inputimage.jpg")
         img = cv2.imread('inputimage.jpg')
         img = cv2.resize(img,(0,0),fx=0.5,fy=0.5)
-        dcp_img = calculate_DCP(img, 15)
+        dcp_img = calculate_DCP(img, 39)
         dcp_img = dcp_img.astype('uint8')
         atm_light = calculate_ambience(img, dcp_img)
-        t_bar = calculate_DCP(img/atm_light,15)
-        trans_bar = 1-(0.85*t_bar)
+        t_bar = calculate_DCP(img/atm_light,30)
+        trans_bar = 1-(0.1*t_bar)
         i=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)/255
-        t_refine = filter_image(i, trans_bar, 30, 0.0001)
+        t_refine = filter_image(i, trans_bar, 80, 0.0001)
         im = img.astype("double")
-        J = recover_image(im, t_refine, atm_light, 0.1)
+        J = recover_image(im, t_refine, atm_light, 0.0)
         J = ((J-np.min(J))/(np.max(J)-np.min(J)))*255
         cb_J = color_balance(np.uint8(J),0.005)
         return_image = np.uint8(cb_J[...,::-1])
